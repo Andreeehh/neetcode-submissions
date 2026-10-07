@@ -1,0 +1,22 @@
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        int[] s1Count = new int[26];
+        int[] windowCount = new int[26];
+        for (char c : s1.toCharArray()) {
+            s1Count[c - 'a']++;
+        }
+        int left = 0, right = 0;
+        while (right < s2.length()) {
+            windowCount[s2.charAt(right) - 'a']++;
+            if (right - left + 1 > s1.length()) {
+                windowCount[s2.charAt(left) - 'a']--;
+                left++;
+            }
+            right++;
+            if (Arrays.equals(s1Count, windowCount)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
